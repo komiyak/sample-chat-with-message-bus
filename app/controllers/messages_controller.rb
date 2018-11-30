@@ -3,9 +3,11 @@ class MessagesController < ApplicationController
   protect_from_forgery except: [:create]
 
   def create
-    Message.create!(message_params) do |m|
+    message = Message.create!(message_params) do |m|
       m.user = User.find_by!(username: params[:username])
     end
+
+    MessageBus.publish '/message', message.to_json
   end
 
   private

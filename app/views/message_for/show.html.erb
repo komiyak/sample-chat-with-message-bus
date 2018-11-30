@@ -3,6 +3,34 @@
 
 <hr/>
 
+<div class="js-messages">
 <% @messages.each do |message| %>
   <p>[id:<%= message.id %>] <%= message.body %></p>
 <% end %>
+</div>
+
+<!-- the script area -->
+
+<!--suppress JSUnresolvedLibraryURL, SpellCheckingInspection -->
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<!--suppress HtmlUnknownTarget -->
+<script
+  src="/js/message-bus.js"></script>
+
+<script>
+    $(function(){
+        MessageBus.start();
+        MessageBus.callbackInterval = 1000;
+
+        MessageBus.subscribe("/message", function(data){
+            console.log('new coming!');
+            console.log(data);
+
+            new_message = JSON.parse(data);
+            $('.js-messages').prepend('<p>[id:' + new_message.id + '] ' + new_message.body + '</p>');
+        });
+    });
+</script>
