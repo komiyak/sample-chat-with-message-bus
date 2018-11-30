@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# noinspection SpellCheckingInspection
+user1 = User.create!({username: 'hoshi'})
+user2 = User.create!({username: 'take'})
+
+Message.create!(user: user1, body: 'user1 message1')
+Message.create!(user: user1, body: 'user1 message2')
+Message.create!(user: user2, body: 'user2 message1')
