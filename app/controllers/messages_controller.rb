@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
       m.user = User.find_by!(username: params[:username])
     end
 
-    MessageBus.publish '/message', message.to_json
+    MessageBus.publish "/user/#{message.user_id}/messages", message.to_json
   end
 
   private

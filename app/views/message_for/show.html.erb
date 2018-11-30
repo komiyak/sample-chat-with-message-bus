@@ -25,7 +25,7 @@
         MessageBus.start();
         MessageBus.callbackInterval = 1000;
 
-        MessageBus.subscribe("/message", function(data){
+        MessageBus.subscribe("/user/<%= @user.id %>/messages", function(data){
             console.log('new coming!');
             console.log(data);
 
